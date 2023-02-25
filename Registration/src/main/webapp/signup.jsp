@@ -70,47 +70,7 @@
 		</div>
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"
 			integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-		<script type="text/javascript">
-			$(function () {
-				$("#myform").on('submit', function (event) {
-					event.preventDefault();
-					var f = $(this).serialize();
-					console.log(f);
-					$(".loader").show();
-					$("form").hide();
-					$.ajax({
-						type: "post",
-						url: "register",
-						data: f,
-						success: function (data, textStatus, jqXHR) {
-							console.log('success');
-							$(".loader").hide();
-							$("form").show();
-							if (data.trim() === 'Success') {
-								$("#msg").css({
-									"color": "green"
-								});
-								$("#msg").html("Successfully Registered 🙂");
-							} else {
-								$("#msg").css({
-									"color": "red"
-								});
-								$("#msg").html("Error While Registration 😢");
-							}
-						},
-						error: function (jqXHR, textStatus, errorThrown) {
-							console.log('error');
-							$(".loader").hide();
-							$("form").show();
-							$("#msg").css({
-								"color": "red"
-							});
-							$("#msg").html("Error While Registration 😢");
-						}
-					});
-				});
-			})
-		</script>
+		<script src="javascript/script.js"></script>
 	</body>
 
 	</html>

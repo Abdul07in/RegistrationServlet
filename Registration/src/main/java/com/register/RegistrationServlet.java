@@ -16,42 +16,45 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public RegistrationServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public RegistrationServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		PrintWriter out = response.getWriter();
 		PreparedStatement pst = null;
 		Connection con = null;
 		String name = request.getParameter("user_name");
 		String password = request.getParameter("user_password");
 		String email = request.getParameter("user_email");
-	
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://dbpanel.squadinfotech.in/testuser_abdul","testuser","testuser");
+			con = DriverManager.getConnection("jdbc:mysql://dbpanel.squadinfotech.in/testuser_abdul", "testuser",
+					"testuser");
 			String sql = "insert into users(name,password,email) values(?,?,?);";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, name);
 			pst.setString(2, password);
-			pst.setString(3,email);
-			
+			pst.setString(3, email);
+
 			if (pst.executeUpdate() > 0) {
 				out.println("Success");
-			}else
-			{
+			} else {
 				out.println("Error");
 			}
-			
+
 		} catch (ClassNotFoundException | SQLException e) {
 			out.println("Error");
-		}finally {
+		} finally {
 			try {
 				pst.close();
 				con.close();
@@ -60,7 +63,7 @@ public class RegistrationServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-	
+
 	}
 
 }
