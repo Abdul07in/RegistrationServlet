@@ -2,7 +2,10 @@ package com.register;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,9 +34,8 @@ public class RegistrationServlet extends HttpServlet {
 		String email = request.getParameter("user_email");
 	
 		try {
-			Thread.sleep(1500);
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/registration","root","root");
+			con = DriverManager.getConnection("jdbc:mysql://dbpanel.squadinfotech.in/testuser_abdul","testuser","testuser");
 			String sql = "insert into users(name,password,email) values(?,?,?);";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, name);
@@ -47,7 +49,7 @@ public class RegistrationServlet extends HttpServlet {
 				out.println("Error");
 			}
 			
-		} catch (ClassNotFoundException | SQLException | InterruptedException e) {
+		} catch (ClassNotFoundException | SQLException e) {
 			out.println("Error");
 		}finally {
 			try {

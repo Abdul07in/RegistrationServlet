@@ -24,19 +24,19 @@
 								<form action="register" method="post" id="myform">
 									<div class="row">
 										<div class="input-field col s12">
-											<input id="username" name="user_name" type="text" class="validate"> <label
+											<input id="username" name="user_name" type="text" class="validate" required="required"> <label
 												for="username">Username</label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s12">
-											<input id="password" name="user_password" type="password" class="validate">
+											<input id="password" name="user_password" type="password" class="validate" required="required">
 											<label for="password">Password</label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s12">
-											<input id="email" type="email" name="user_email" class="validate"> <label
+											<input id="email" type="email" name="user_email" class="validate" required="required"> <label
 												for="email">Email</label>
 										</div>
 									</div>
@@ -83,7 +83,6 @@
 						url: "register",
 						data: f,
 						success: function (data, textStatus, jqXHR) {
-							console.log(data);
 							console.log('success');
 							$(".loader").hide();
 							$("form").show();
@@ -100,7 +99,6 @@
 							}
 						},
 						error: function (jqXHR, textStatus, errorThrown) {
-							console.log(data);
 							console.log('error');
 							$(".loader").hide();
 							$("form").show();
