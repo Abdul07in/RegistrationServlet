@@ -1,7 +1,10 @@
 $(document).ready(function() {
 	$("#myform").on('submit', function(event) {
 		event.preventDefault();
-		var formData = $(this).serialize();
+		//var formData = $(this).serialize();
+
+		let formData = new FormData(this);
+
 		$(".loader").show();
 		$("form").hide();
 		$.ajax({
@@ -9,7 +12,7 @@ $(document).ready(function() {
 			url: "register",
 			data: formData,
 			success: function(data, textStatus, jqXHR) {
-				console.log('success');
+				console.log('success\n' + data);
 				$(".loader").hide();
 				$("form").show();
 				if (data.trim() === 'Success') {
@@ -32,7 +35,9 @@ $(document).ready(function() {
 					"color": "red"
 				});
 				$("#msg").html("Error While Registration 😢");
-			}
+			},
+			processData: false,
+			contentType: false
 		});
 	});
 })
